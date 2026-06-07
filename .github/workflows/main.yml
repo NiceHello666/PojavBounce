@@ -27,7 +27,9 @@ jobs:
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew build
+      run: ./gradlew build -Dorg.gradle.internal.http.socketTimeout=120000 --stacktrace
+      env:
+        GRADLE_OPTS: "-Dcom.sun.jndi.ldap.connect.pool=false"
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
